@@ -116,8 +116,8 @@ class LogRecord extends AbstractModel implements LogRecordInterface
     {
         $value = $this->scopeConfig->getValue(
             self::XML_PATH_FACTOR_VALUE,
-            $this->getStoreId(),
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->getStoreId()
         );
 
         return floatval($value ?? 1);
@@ -132,10 +132,10 @@ class LogRecord extends AbstractModel implements LogRecordInterface
     {
         $decade = pow(10, self::PRECISION);
 
-        $factor = round($this->getMultiFactor(), self::PRECISION);
+        $factor = round($this->getMultiFactor() * $decade, self::PRECISION);
         $number = round($number * $decade, self::PRECISION);
 
-        return ($factor * $number) / $decade;
+        return ($factor * $number) / ($decade * $decade);
     }
 
     /**
