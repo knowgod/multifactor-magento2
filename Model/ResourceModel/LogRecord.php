@@ -8,6 +8,8 @@ namespace MadePeople\MultiFactor\Model\ResourceModel;
 
 use MadePeople\MultiFactor\Api\Data\LogRecordInterface;
 
+/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
+
 /**
  * Class LogRecord
  *

@@ -11,6 +11,8 @@ use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 
+/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
+
 /**
  * Class InstallSchema
  *

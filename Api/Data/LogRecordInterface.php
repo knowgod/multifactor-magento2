@@ -1,11 +1,16 @@
 <?php
 /**
- * s@author    Arkadij Kuzhel <akuzhel@gmail.com>
+ * @author    Arkadij Kuzhel <akuzhel@gmail.com>
  * @created   10.04.18
  */
 
 namespace MadePeople\MultiFactor\Api\Data;
 
+use Magento\Sales\Model\Order;
+
+/**
+ * Interface LogRecordInterface
+ */
 interface LogRecordInterface
 {
     /**#@+
@@ -22,11 +27,11 @@ interface LogRecordInterface
     const MAIN_TABLE = 'multifactor_log';
 
     /**
-     * @param \Magento\Sales\Model\Order $order
+     * @param Order $order
      *
      * @return LogRecordInterface
      */
-    public function processOrder(\Magento\Sales\Model\Order $order);
+    public function processOrder(Order $order);
 
     /**
      * @return int|null

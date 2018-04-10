@@ -114,6 +114,7 @@ class LogRecord extends AbstractModel implements LogRecordInterface
      */
     protected function getMultiFactor()
     {
+        /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
         $value = $this->scopeConfig->getValue(
             self::XML_PATH_FACTOR_VALUE,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
