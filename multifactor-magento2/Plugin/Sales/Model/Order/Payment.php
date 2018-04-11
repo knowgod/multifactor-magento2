@@ -47,8 +47,15 @@ class Payment
      */
     protected function saveLogRecord(OrderPayment $payment)
     {
+        $order = $payment->getOrder();
+        if (!($order instanceof \Magento\Sales\Model\Order) || 0 != $order->getBaseTotalDue()) {
+            return;
+        }
+
         /** @var \MadePeople\MultiFactor\Api\Data\LogRecordInterface $logRecord */
         $logRecord = $this->logRecordFactory->create();
-        $logRecord->processOrder($payment->getOrder());
+        if ($logRecord->isEnabled($order->getStore()->getId())) {
+            $logRecord->processOrder($order);
+        }
     }
 }

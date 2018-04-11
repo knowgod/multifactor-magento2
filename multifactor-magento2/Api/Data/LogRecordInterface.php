@@ -27,6 +27,13 @@ interface LogRecordInterface
     const MAIN_TABLE = 'multifactor_log';
 
     /**
+     * @param int $storeId
+     *
+     * @return bool
+     */
+    public function isEnabled($storeId);
+
+    /**
      * @param Order $order
      *
      * @return LogRecordInterface

@@ -11,6 +11,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Sales\Model\Order;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class Record
@@ -23,7 +24,8 @@ class LogRecord extends AbstractModel implements LogRecordInterface
      */
     const PRECISION = 4;
 
-    const XML_PATH_FACTOR_VALUE = 'multifactor/general/value';
+    const XML_PATH_FACTOR_VALUE     = 'multifactor/general/value';
+    const XML_PATH_FACTOR_IS_ACTIVE = 'multifactor/general/is_active';
 
     /**
      * @var ScopeConfigInterface
@@ -57,6 +59,22 @@ class LogRecord extends AbstractModel implements LogRecordInterface
     protected function _construct()
     {
         $this->_init(ResourceModel\LogRecord::class);
+    }
+
+    /**
+     * @param int $storeId
+     *
+     * @return bool
+     */
+    public function isEnabled($storeId)
+    {
+        $status = $this->scopeConfig->getValue(
+            self::XML_PATH_FACTOR_IS_ACTIVE,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+
+        return (bool) $status ?? false;
     }
 
     /**
@@ -117,7 +135,7 @@ class LogRecord extends AbstractModel implements LogRecordInterface
         /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
         $value = $this->scopeConfig->getValue(
             self::XML_PATH_FACTOR_VALUE,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            ScopeInterface::SCOPE_STORE,
             $this->getStoreId()
         );
 
